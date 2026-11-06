@@ -1,23 +1,53 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="css/mystyle.css">
-<title>Page Title</title>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Title</title>
+    <link rel="stylesheet" href="mystyle.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Personal Profile Web page</h1>
+        <div class="theme-toggle">
+          <span class="theme-label">Light</span>
+          <button class="toggle-switch" id="toggleBtn">
+            <span class="toggle-slider"></span>
+          </button>
+          <span class="theme-label">Dark</span>
+        </div>
+      </header>
 
-<h1>Personal Profile Web page </h1>
-<br>
+      <main>
+        <section class="hero">
+          <h2>About Me (Hello, I'm Nicole Lith Paulo!)</h2>
+          <p>Education / Achievements: SHS Graduate, Ongoing a college degree</p>
+        </section>
 
-<br>About Me (Hello, I'm Nicole Lith Paulo!) </br>
-<br>Education / Achievements: SHS Graduate, Ongoing a college degree </br>
-<br>Course: Bachelor of Science in Computer Science with specialization in Cybersecurity and forensics. </br>
-<br>IT Experience: HTML, CSS, JS, Linux, Java and Python </br>
-<br>Hobbies & Interests: Playing Musical Instruments, Reading and Traveling </br>
-<br>Goals In Life / Dream: Finish my degree </br>
-<br>Picture Gallery 
-<div id="header" align="center">
-  <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExazlseGVubXR5cGxtd29lbXNlMHd4MnR1NnB4aWFvMXVteGFmZ2Y0aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbnUQpnihPSIgIXuZv/giphy.gif" width="200"/>
-  
-</body>
+        <section class="content">
+          <div class="card">
+            <h3>Course: Bachelor of Science in Computer Science with specialization in Cybersecurity and forensics.</h3>
+            <p>
+              IT Experience: HTML, CSS, JS, Linux, Java and Python
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Hobbies & Interests: Playing Musical Instruments, Reading and Traveling</h3>
+            <p>
+              Goals In Life / Dream: Finish my degree 
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Picture Gallery </h3>
+              <div id="header" align="center">
+             <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExazlseGVubXR5cGxtd29lbXNlMHd4MnR1NnB4aWFvMXVteGFmZ2Y0aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbnUQpnihPSIgIXuZv/giphy.gif" width="200"/>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
 </html>
+
