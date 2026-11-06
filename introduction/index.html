@@ -1,56 +1,105 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page Title</title>
-        <link rel="stylesheet" href="mystyle.css" />
-        <script src="script.js" defer></script>
-    <link rel="stylesheet" href="mystyle.css" />
-    <script src="script.js" defer></script>
-  </head>
-  <body>
-    <div class="container">
-      <header>
-        <h1>Personal Profile Web page</h1>
-        <div class="theme-toggle">
-          <span class="theme-label">Light</span>
-          <button class="toggle-switch" id="toggleBtn">
-            <span class="toggle-slider"></span>
-          </button>
-          <span class="theme-label">Dark</span>
-        </div>
-      </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="icon" href="/favicon.svg" />
+  <title>{{ title }}</title>
 
-      <main>
-        <section class="hero">
-          <h2>About Me (Hello, I'm Nicole Lith Paulo!)</h2>
-          <p>Education / Achievements: SHS Graduate, Ongoing a college degree</p>
-        </section>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet"
+  />
 
-        <section class="content">
-          <div class="card">
-            <p>Course: Bachelor of Science in Computer Science with specialization in Cybersecurity and forensics.</p>
-            <p>
-              IT Experience: HTML, CSS, JS, Linux, Java and Python
-            </p>
-          </div>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet"
+  />
 
-          <div class="card">
-            <p>Hobbies & Interests: Playing Musical Instruments, Exploring new tech trends, Reading and Traveling</p>
-            <p>
-              Goals In Life / Dream: Finish my degree 
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Picture Gallery </h3>
-              <div id="header" align="center">
-             <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExazlseGVubXR5cGxtd29lbXNlMHd4MnR1NnB4aWFvMXVteGFmZ2Y0aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbnUQpnihPSIgIXuZv/giphy.gif" width="200"/>
-          </div>
-        </section>
-      </main>
+  <link rel="stylesheet" href="mystyle.css" />
+  <script>
+    /*to prevent Firefox FOUC, this must be here*/
+    let FF_FOUC_FIX;
+  </script>
+</head>
+<body>
+  <main
+    class="flex min-h-screen flex-col max-w-5xl mx-auto px-4 py-4 sm:py-8 leading-5 dark:bg-black dark:text-white font-sans"
+  >
+    <div class="flex justify-between flex-wrap mb-2">
+      <a href="/">
+        <h1 class="font-mono text-2xl font-bold">{{ name }}</h1>
+      </a>
+      <div
+        class="flex flex-col sm:flex-row justify-between gap-2 align-middle items-center my-1"
+      >
+        {% call button("https://linkedin.com/in/patilsr", "w-32 bg-[#0077b5] text-white") %}
+          <div style="mask-image: url('/assets/linkedin.svg');" class="icon"></div>
+          <span class="ms-1">LinkedIn</span>
+        {% endcall %}
+        {%
+          call
+          button("https://github.com/sagarreddypatil", "w-32")
+        %}
+          <div style="mask-image: url('/assets/github.svg');" class="icon"></div>
+          <span class="ms-1">GitHub</span>
+        {% endcall %}
+        <!-- {% call button("/assets/resume.pdf", "w-32") %}
+          <span class="ms-1">Resume</span>
+        {% endcall %} -->
+      </div>
     </div>
-  </body>
+    {% block content %}{% endblock %}
+    <div class="h-3"></div>
+    {% call fieldset("cat README.md") %}
+      <div class="flex flex-row justify-between">
+        <span class="prose dark:prose-invert">
+          Source code on
+          <a href="https://github.com/sagarreddypatil/portfolio-website">
+            GitHub
+          </a>
+        </span>
+      </div>
+    {% endcall %}
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
 </html>
 
+{% extends "layout.html" %}
+{% from "components/fieldset.html" import fieldset %}
+
+{% block content %}
+  <div class="flex flex-col gap-4">
+    <!-- <WhoAmI /> -->
+    {% call fieldset("cat README.md") %}
+      <div class="flex flex-col lg:flex-row gap-3 text-lg">
+        <article class="text-black text-lg prose-p:m-0 flex flex-col gap-4">
+          <p>
+            Education / Achievements: SHS Graduate, I'm currently a college student
+          </p>
+          <p>
+           Course: Bachelor of Science in Computer Science with specialization in Cybersecurity and forensics.
+          </p>
+          <p>
+           IT Experience: HTML, CSS, JS, Linux, Java and Python
+          </p>
+          <p>
+           Hobbies & Interests: Playing Musical Instruments, Reading, Exploring Tech Trends and Traveling 
+          </p>
+        </article>
+        <br>Picture Gallery 
+        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExazlseGVubXR5cGxtd29lbXNlMHd4MnR1NnB4aWFvMXVteGFmZ2Y0aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbnUQpnihPSIgIXuZv/giphy.gif" width="200"/>
+      </div>
+    {% endcall %}
+    {% call fieldset("ls ~/projects") %}
+      {{ lists["projects"]|safe }}
+    {% endcall %}
+
+  </div>
+{% endblock %}
