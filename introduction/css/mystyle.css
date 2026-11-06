@@ -1,8 +1,8 @@
 body {
-  background-color: rgb(151, 48, 182);
+  background-color: rgb(255, 253, 208); /* Pale yellow / cream */
+  color: rgb(40, 40, 40);             /* Gray-black */
 }
 
 h1 {
-  color: rgb(173, 19, 19);
   margin-left: 20px;
 }
