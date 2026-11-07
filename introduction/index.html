@@ -21,14 +21,7 @@
   </script>
 
   <style>
-    /* ==========================================================
-       1. COLOR PALETTES (CSS VARIABLES)
-       Change colors here and the whole site updates.
-       Only color properties are swapped, so nothing changes size
-       or position when you toggle themes, which means no layout shift.
-       ========================================================== */
 
-    /* Light theme (default) */
     :root {
       --bg:          #fdf8f6;   /* page background: warm off-white */
       --surface:     #ffffff;   /* cards and panels */
@@ -66,7 +59,7 @@
       line-height: 1.7;
       color: var(--text);
       background-color: var(--bg);
-      /* Smooth color transition when the theme changes */
+      
       transition: background-color 0.5s ease, color 0.5s ease;
     }
 
@@ -200,9 +193,6 @@
     [data-theme="dark"] .theme-toggle .icon-moon { opacity: 0; transform: rotate(90deg); }
     [data-theme="dark"] .theme-toggle .icon-sun  { opacity: 1; transform: rotate(0deg); }
 
-    /* ==========================================================
-       5. HERO + ABOUT ME
-       ========================================================== */
     .about {
       display: grid;
       grid-template-columns: 1fr 1.2fr;
@@ -210,7 +200,7 @@
       align-items: center;
     }
 
-    /* Portrait frame: a gradient background sits behind the photo */
+    /* Portrait frame: background sits behind the photo */
     .portrait {
       position: relative;
       aspect-ratio: 4 / 5;
@@ -443,7 +433,6 @@
     </div>
   </footer>
 
-  <!-- ========================= THEME TOGGLE ========================= -->
   <button class="theme-toggle" id="themeToggle" type="button"
           aria-label="Switch between light and dark mode" title="Toggle theme">
     <!-- Moon icon (shown in light mode) -->
