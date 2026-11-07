@@ -1,24 +1,474 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-theme="light">
 <head>
-<link rel="stylesheet" href="mystyle.css">
-<title>Personal Website</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Juliane Lith Nicole Paulo | Computer Science Girly</title>
+
+  <!-- Fonts: a soft serif for headings and a clean sans-serif for body text.
+       Swap these for any Google Fonts you like. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <script>
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      var prefersDark = window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = saved || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <style>
+    /* ==========================================================
+       1. COLOR PALETTES (CSS VARIABLES)
+       Change colors here and the whole site updates.
+       Only color properties are swapped, so nothing changes size
+       or position when you toggle themes, which means no layout shift.
+       ========================================================== */
+
+    /* Light theme (default) */
+    :root {
+      --bg:          #fdf8f6;   /* page background: warm off-white */
+      --surface:     #ffffff;   /* cards and panels */
+      --text:        #3d3339;   /* main text */
+      --muted:       #7d6b74;   /* secondary text */
+      --accent:      #e8a0b4;   /* blush pink: primary accent */
+      --accent-soft: #f6dfe6;   /* light blush for tags and highlights */
+      --accent-2:    #b9a2d8;   /* lavender: secondary accent */
+      --border:      #efe2e4;   /* delicate borders */
+      --shadow:      0 10px 30px rgba(120, 80, 95, 0.08);
+      --radius:      18px;
+    }
+
+    /* Dark theme */
+    [data-theme="dark"] {
+      --bg:          #1e1a22;
+      --surface:     #27212b;
+      --text:        #f3e9ee;
+      --muted:       #b5a3ad;
+      --accent:      #e9a6bb;
+      --accent-soft: #3d2f3b;
+      --accent-2:    #b7a3dd;
+      --border:      #3a313d;
+      --shadow:      0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: var(--bg);
+      /* Smooth color transition when the theme changes */
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 600;
+      line-height: 1.2;
+      margin: 0 0 0.5rem;
+    }
+
+    a { color: inherit; text-decoration: none; transition: color 0.3s ease; }
+    a:hover { color: var(--accent); }
+
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: 0 auto;
+    }
+
+    section { padding: 5rem 0; }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(2rem, 4vw, 2.6rem);
+      margin-bottom: 0.3rem;
+    }
+
+    /* A small decorative divider: a delicate line with a dot */
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      margin: 0.6rem auto 3rem;
+      color: var(--accent);
+    }
+    .divider::before,
+    .divider::after {
+      content: "";
+      width: 60px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.6;
+    }
+    .divider span {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background-color: var(--bg);
+      border-bottom: 1px solid var(--border);
+      transition: background-color 0.5s ease, border-color 0.5s ease;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1.1rem 0;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-style: italic;
+      color: var(--text);
+    }
+    .logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+    }
+    .nav-links a { position: relative; padding-bottom: 3px; }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    .theme-toggle {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      z-index: 100;
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background-color: var(--surface);
+      color: var(--accent);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: transform 0.3s ease, background-color 0.5s ease, border-color 0.5s ease;
+    }
+    .theme-toggle:hover { transform: scale(1.08) rotate(12deg); }
+    .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .theme-toggle svg {
+      grid-area: 1 / 1;          /* stack both icons in the same cell */
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      transition: opacity 0.4s ease, transform 0.5s ease;
+    }
+    .theme-toggle .icon-moon { opacity: 1; transform: rotate(0deg); }
+    .theme-toggle .icon-sun  { opacity: 0; transform: rotate(-90deg); }
+
+    [data-theme="dark"] .theme-toggle .icon-moon { opacity: 0; transform: rotate(90deg); }
+    [data-theme="dark"] .theme-toggle .icon-sun  { opacity: 1; transform: rotate(0deg); }
+
+    /* ==========================================================
+       5. HERO + ABOUT ME
+       ========================================================== */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    /* Portrait frame: a gradient background sits behind the photo */
+    .portrait {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: 200px 200px var(--radius) var(--radius);
+      padding: 10px;
+      background: linear-gradient(160deg, var(--accent), var(--accent-2));
+      box-shadow: var(--shadow);
+    }
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 190px 190px calc(var(--radius) - 4px) calc(var(--radius) - 4px);
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.6rem, 5vw, 3.8rem);
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+    .hero-title em { color: var(--accent); }
+
+    .about p { color: var(--muted); margin: 0 0 1rem; }
+
+    .btn {
+      display: inline-block;
+      margin-top: 0.8rem;
+      padding: 0.8rem 1.8rem;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+    .btn:hover {
+      background: transparent;
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      margin-left: 0.6rem;
+    }
+    .btn-outline:hover { background: var(--accent); color: #fff; }
+
+    /* ==========================================================
+       6. PROJECT GRID
+       ========================================================== */
+    .projects { background-color: var(--surface); transition: background-color 0.5s ease; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.4s ease, border-color 0.4s ease, background-color 0.5s ease;
+    }
+    .card:hover { transform: translateY(-6px); border-color: var(--accent); }
+
+    .card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .card-body { padding: 1.4rem 1.5rem 1.6rem; }
+    .card-body h3 { font-size: 1.5rem; }
+    .card-body p { color: var(--muted); font-size: 0.95rem; margin: 0.4rem 0 1rem; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; margin: 0; }
+    .tags li {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--text);
+      transition: background-color 0.5s ease;
+    }
+
+    footer {
+      text-align: center;
+      padding: 4rem 0 6rem; /* extra bottom space so the toggle button never covers text */
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem;
+    }
+    .socials a {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: transform 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+    .socials a:hover { transform: translateY(-3px); border-color: var(--accent); color: var(--accent); }
+    .socials svg { width: 18px; height: 18px; fill: currentColor; }
+
+    .copyright { font-size: 0.85rem; color: var(--muted); margin: 0; }
+
+    @media (max-width: 800px) {
+      section { padding: 3.5rem 0; }
+      .about { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+      .portrait { max-width: 320px; margin: 0 auto; }
+      .btn-outline { margin-left: 0; margin-top: 0.6rem; }
+    }
+
+    @media (max-width: 520px) {
+      .nav-links { gap: 1rem; font-size: 0.85rem; }
+    }
+
+    /* Respect users who prefer reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<h1>Personal Profile Web page </h1>
-<br>
+  <header>
+    <div class="container nav">
 
-<br>About Me (Hello, I'm Nicole Lith Paulo!)
-<br>Education / Achievements: SHS Graduate, Ongoing a college degree
-<br>Course: Bachelor of Science in Computer Science with specialization in Cybersecurity and forensics.
-<br>IT Experience: HTML, CSS, JS, Linux, Java and Python 
-<br>Hobbies & Interests: Playing Musical Instruments, Exploring new tech trends, Reading, Quality Time with my cat and Traveling
-<br>Goals In Life / Dream: Finish my degree 
-<br>Picture Gallery
-<div id="header" align="center">
-<img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExazlseGVubXR5cGxtd29lbXNlMHd4MnR1NnB4aWFvMXVteGFmZ2Y0aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbnUQpnihPSIgIXuZv/giphy.gif" width="200"/>
-  
+      <ul class="nav-links">
+        <li><a href="#about">Picture Gallery</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="top">
+
+<section id="Picture Gallery">
+      <div class="container Picture Gallery">
+        <div class="portrait">
+          <div id="header" align="center">
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExazlseGVubXR5cGxtd29lbXNlMHd4MnR1NnB4aWFvMXVteGFmZ2Y0aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbnUQpnihPSIgIXuZv/giphy.gif" width="200"/>
+        </div>
+
+        <div>
+          <p class="eyebrow">Hello, I'm Lith</p>
+          <h1 class="hero-title">Juliane Lith Nicole Paulo <em>&amp;</em> Your Craft</h1>
+          <p>Education / Achievements: SHS Graduate, Ongoing a college degree</p>
+          <p>Course: Bachelor of Science in Computer Science with specialization in Cybersecurity and forensics.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="IT Experience">
+      <div class="container">
+        <h2 class="section-title">IT Experience: HTML, CSS, JS, Linux, Java and Python </h2>
+        <div class="divider"><span></span></div>
+
+        <div class="grid">
+
+    <section id="contact">
+      <div class="container" style="text-align:center;">
+        <h2 class="section-title">Hobbies & Interests: Playing Musical Instruments, Exploring new tech trends, Reading, Quality Time with my cat and Traveling</h2>
+        <div class="divider"><span></span></div>
+        <p style="color:var(--muted); max-width:520px; margin:0 auto 2rem;">
+          Have a project in mind, or simply with the same interest? My inbox is always open.
+        </p>
+        <a href="mailto:jppaulo@student.apc.edu.ph" class="btn"jppaulo@student.apc.edu.ph</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <!-- CUSTOMIZE: replace each href with your own profile link.
+           Add or remove <li> items as needed. -->
+      <ul class="socials">
+        <li>
+          <a href="https://www.linkedin.com/in/juliane-lith-nicole-paulo-69a42b378/?trk=PROFILE_DROP_DOWN" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.4V9h3.4v1.6c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2zM5.3 7.4a2.1 2.1 0 110-4.1 2.1 2.1 0 010 4.1zM7.1 20.5H3.6V9h3.6v11.5zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0z"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/colelithpau" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.7 1.6.3 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.2.9 2.3v3.4c0 .3.2.7.8.6A12 12 0 0012 .3z"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:jppaulo@student.apc.edu.ph" aria-label="Email">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+        </li>
+      </ul>
+
+      <p class="copyright">
+        <!-- CUSTOMIZE: your name and year -->
+        &copy; <span id="year"></span> Juliane Lith Nicole Paulo.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ========================= THEME TOGGLE ========================= -->
+  <button class="theme-toggle" id="themeToggle" type="button"
+          aria-label="Switch between light and dark mode" title="Toggle theme">
+    <!-- Moon icon (shown in light mode) -->
+    <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+    <!-- Sun icon (shown in dark mode) -->
+    <svg class="icon-sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+    </svg>
+  </button>
+
+  <script>
+    // Footer year updates automatically
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme toggle logic
+    (function () {
+      var root = document.documentElement;
+      var button = document.getElementById('themeToggle');
+
+      button.addEventListener('click', function () {
+        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+      });
+    })();
+  </script>
+
 </body>
 </html>
 
