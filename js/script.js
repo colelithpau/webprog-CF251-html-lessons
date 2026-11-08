@@ -1,16 +1,27 @@
-const toggleBtn = document.getElementById("toggleBtn");
-const html = document.documentElement;
+<script>
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      var prefersDark = window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = saved || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
 
-toggleBtn.addEventListener("click", () => {
-  console.log("this part run");
-  const currentTheme = html.getAttribute("data-theme"); // light or dark
-  const newTheme = currentTheme === "dark" ? "light" : "dark";
+  <script>
+    // Footer year updates automatically
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-  html.setAttribute("data-theme", newTheme);
+    // Theme toggle logic
+    (function () {
+      var root = document.documentElement;
+      var button = document.getElementById('themeToggle');
 
-  localStorage.setItem("theme", newTheme);
-});
-
-// check for saved theme preference or default light mode
-const currentTheme = localStorage.getItem("theme") || "light";
-html.setAttribute("data-theme", currentTheme);
+      button.addEventListener('click', function () {
+        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+      });
+    })();
+  </script>
