@@ -200,7 +200,7 @@
       align-items: center;
     }
 
-    /* Portrait frame: background sits behind the photo */
+
     .portrait {
       position: relative;
       aspect-ratio: 4 / 5;
@@ -297,7 +297,7 @@
 
     footer {
       text-align: center;
-      padding: 4rem 0 6rem; /* extra bottom space so the toggle button never covers text */
+      padding: 4rem 0 6rem; 
     }
 
     .socials {
@@ -334,7 +334,6 @@
       .nav-links { gap: 1rem; font-size: 0.85rem; }
     }
 
-    /* Respect users who prefer reduced motion */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         transition-duration: 0.01ms !important;
@@ -351,7 +350,7 @@
 
       <ul class="nav-links">
         <li><a href="#about">Picture Gallery</a></li>
-        <li><a href="#projects">Projects</a></li>
+        <li><a href="#projects">Experiences</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -368,8 +367,8 @@
 
         <div>
           <p class="eyebrow">Hello, I'm Lith</p>
-          <h1 class="hero-title">Juliane Lith Nicole Paulo <em>&amp;</em> | Computer Science Girly</h1>
-          <p>Education / Achievements: SHS Graduate, Ongoing a college degree</p>
+          <h1 class="hero-title">Juliane Lith Nicole Paulo <em>&amp;</em> CS Girly</h1>
+          <p>Education / Achievements: SHS Graduate, In my Sophomore Year</p>
           <p>Course: Bachelor of Science in Computer Science with specialization in Cybersecurity and forensics.</p>
         </div>
       </div>
@@ -427,7 +426,7 @@
       </ul>
 
       <p class="copyright">
-        <!-- CUSTOMIZE: your name and year -->
+
         &copy; <span id="year"></span> Juliane Lith Nicole Paulo.
       </p>
     </div>
@@ -435,9 +434,9 @@
 
   <button class="theme-toggle" id="themeToggle" type="button"
           aria-label="Switch between light and dark mode" title="Toggle theme">
-    <!-- Moon icon (shown in light mode) -->
+
     <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
-    <!-- Sun icon (shown in dark mode) -->
+
     <svg class="icon-sun" viewBox="0 0 24 24">
       <circle cx="12" cy="12" r="4"/>
       <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
@@ -445,10 +444,10 @@
   </button>
 
   <script>
-    // Footer year updates automatically
+
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Theme toggle logic
+    // Theme logic
     (function () {
       var root = document.documentElement;
       var button = document.getElementById('themeToggle');
