@@ -1,12 +1,12 @@
  /* Registering custom properties as <color> lets the browser animate them. The theme now fades smoothly instead of snapping.*/
-    @property --bg       { syntax: '<color>'; inherits: true; initial-value: #faf6f1; }
-    @property --surface  { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
-    @property --text     { syntax: '<color>'; inherits: true; initial-value: #2b2233; }
-    @property --muted    { syntax: '<color>'; inherits: true; initial-value: #6e6378; }
-    @property --rose     { syntax: '<color>'; inherits: true; initial-value: #e58fa6; }
-    @property --sage     { syntax: '<color>'; inherits: true; initial-value: #a9c9b5; }
-    @property --border   { syntax: '<color>'; inherits: true; initial-value: #ece3e6; }
-    @property --rose-soft{ syntax: '<color>'; inherits: true; initial-value: #fbe9ef; }
+       { syntax: '<color>'; inherits: true; initial-value: #faf6f1; }
+       { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
+       { syntax: '<color>'; inherits: true; initial-value: #2b2233; }
+       { syntax: '<color>'; inherits: true; initial-value: #6e6378; }
+       { syntax: '<color>'; inherits: true; initial-value: #e58fa6; }
+       { syntax: '<color>'; inherits: true; initial-value: #a9c9b5; }
+       { syntax: '<color>'; inherits: true; initial-value: #ece3e6; }
+       { syntax: '<color>'; inherits: true; initial-value: #fbe9ef; }
 
 /* This CSS variables change the color scheme values to restyle the whole site. Colors use oklch(), which keeps lightness consistent so palettes look balanced.*/
 
