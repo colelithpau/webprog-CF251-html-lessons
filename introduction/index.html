@@ -329,179 +329,6 @@
       filter: none;
     }
 
-    /* PROJECT GRID (flexbox wrap) */
-    .project-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.75rem;
-    }
-
-    .card {
-      flex: 1 1 260px;
-      max-width: 100%;
-      display: flex;
-      flex-direction: column;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: transform .4s ease, border-color .4s ease;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: var(--berry);
-    }
-
-    .card img {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-    }
-
-    .card-body {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      padding: 1.25rem 1.4rem 1.4rem;
-    }
-    .card-body h3 { font-size: 1.5rem; }
-    .card-body p {
-      color: var(--muted);
-      font-size: .93rem;
-      margin: .3rem 0 1rem;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .4rem;
-      list-style: none;
-      margin: auto 0 0;
-      padding: 0;
-    }
-    .tags li {
-      font-size: .74rem;
-      padding: .25rem .7rem;
-      border-radius: 999px;
-      background: var(--leaf-soft);
-      color: var(--text);
-    }
-
-    /* CONTACT */
-    .contact {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: .25rem;
-    }
-    .contact p { color: var(--muted); max-width: 480px; margin-bottom: 1.75rem; }
-
-    /* FOOTER + SOCIAL LINKS (flexbox) */
-    .site-footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 0 6rem;       /* bottom room so the switch never covers text */
-      text-align: center;
-    }
-
-    .socials {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: .9rem;
-      list-style: none;
-      margin: 0 0 1.5rem;
-      padding: 0;
-    }
-    .socials a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 46px; height: 46px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      transition: transform .3s ease, border-color .3s ease, color .3s ease;
-    }
-    .socials a:hover {
-      transform: translateY(-3px);
-      border-color: var(--berry);
-      color: var(--berry-text);
-    }
-    .socials svg { width: 18px; height: 18px; fill: currentColor; }
-
-    .copyright {
-      font-size: .85rem;
-      color: var(--muted);
-      margin: 0;
-    }
-
-    /* THEME SWITCH (fixed in the corner)
-       A pill-shaped toggle with a sliding knob. */
-    .theme-switch {
-      position: fixed;
-      right: 1.25rem;
-      bottom: 1.25rem;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      width: 64px;
-      height: 34px;
-      padding: 3px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: var(--blush);
-      box-shadow: var(--shadow);
-      cursor: pointer;
-      transition: background-color .5s ease, border-color .5s ease;
-    }
-    .theme-switch:focus-visible {
-      outline: 2px solid var(--berry);
-      outline-offset: 3px;
-    }
-
-    .theme-switch .knob {
-      display: grid;
-      place-items: center;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: var(--berry);
-      color: #fff;
-      transform: translateX(0);
-      transition: transform .45s cubic-bezier(.4, .1, .2, 1), background-color .5s ease;
-    }
-    [data-theme="dark"] .theme-switch .knob {
-      transform: translateX(29px);   /* slide to the right in dark mode */
-    }
-
-    .theme-switch svg {
-      width: 14px; height: 14px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-    }
-    .theme-switch .icon-moon { display: none; }
-    [data-theme="dark"] .theme-switch .icon-sun { display: none; }
-    [data-theme="dark"] .theme-switch .icon-moon { display: block; }
-
-    /* RESPONSIVE + ACCESSIBILITY */
-    @media (max-width: 600px) {
-      .nav-links { gap: 1rem; font-size: .88rem; }
-      .details-table th,
-      .details-table td { display: block; width: 100%; }
-      .details-table th { padding-bottom: 0; border-bottom: none; }
-      .details-table td { padding-top: .2rem; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        transition-duration: .01ms !important;
-        scroll-behavior: auto !important;
-      }
-    }
   </style>
 </head>
 
@@ -513,7 +340,6 @@
       <a href="#top" class="logo">Juliane Lith Nicole <span></span>Paulo</a>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
-        <li><a href="#projects">Experiences</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -581,55 +407,11 @@
           </table>
 
           <div class="btn-row">
-            <a href="#projects" class="btn">View My Experience</a>
-            <a href="#contact" class="btn btn-outline">Get in Touch</a>
+            <a href="#contact" class="btn btn-outline">Let's Connect!</a>
           </div>
         </div>
       </section>
 
-      <!-- Experience  -->
-      <section id="projects">
-        <div class="divider"><span></span></div>
-
-        <div class="project-grid">
-          <!-- EXPERIENCE CARD -->
-          <article class="card">
-            <img src="https://placehold.co/800x600/e58fa6/ffffff?text=Project+One" alt="preview" />
-            <div class="card-body">
-              <h3>WILL UPDATE THIS SOON</h3>
-              <p>Blank for now, I'll add deets here soon</p>
-              <ul class="tags">
-                <li>Web Design</li>
-                <li>Branding</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="card">
-            <img src="https://placehold.co/800x600/a9c9b5/2b2233?text=Project+Two" alt="preview" />
-            <div class="card-body">
-              <h3>WILL UPDATE THIS SOON</h3>
-              <p>Blank for now, I'll add deets here soon</p>
-              <ul class="tags">
-                <li>Illustration</li>
-                <li>Editorial</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="card">
-            <img src="https://placehold.co/800x600/fbe9ef/2b2233?text=Project+Three" alt="preview" />
-            <div class="card-body">
-              <h3>WILL UPDATE THIS SOON</h3>
-              <p>Blank for now, I'll add deets here soon</p>
-              <ul class="tags">
-                <li>App Design</li>
-                <li>UX</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-      </section>
 
       <!-- CONTACT  -->
       <section id="contact" class="frame contact">
