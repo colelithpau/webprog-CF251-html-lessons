@@ -1,14 +1,456 @@
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: DodgerBlue;
-}
+<style>
+ /* Registering custom properties as <color> lets the browser animate them. The theme now fades smoothly instead of snapping.*/
+       { syntax: '<color>'; inherits: true; initial-value: #faf6f1; }
+       { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
+       { syntax: '<color>'; inherits: true; initial-value: #2b2233; }
+       { syntax: '<color>'; inherits: true; initial-value: #6e6378; }
+       { syntax: '<color>'; inherits: true; initial-value: #e58fa6; }
+       { syntax: '<color>'; inherits: true; initial-value: #a9c9b5; }
+       { syntax: '<color>'; inherits: true; initial-value: #ece3e6; }
+       { syntax: '<color>'; inherits: true; initial-value: #fbe9ef; }
 
-.container div {
-  background-color: #f1f1f1;
-  width: 100px;
-  margin: 10px;
-  padding: 10px;
-  text-align: center;  
-  font-size: 30px;
-}
+/* This CSS variables change the color scheme values to restyle the whole site. Colors use oklch(), which keeps lightness consistent so palettes look balanced.*/
+
+/* Light theme (default): cream, rose, and sage */
+    :root {
+      --bg:         oklch(97.5% 0.014 85);   /* warm cream page */
+      --surface:    oklch(99.2% 0.006 85);   /* card surfaces */
+      --text:       oklch(28% 0.035 340);    /* plum-ink text */
+      --muted:      oklch(50% 0.03 340);     /* secondary text */
+      --rose:       oklch(72% 0.12 10);      /* primary accent */
+      --rose-deep:  oklch(58% 0.14 10);      /* hover and emphasis */
+      --rose-soft:  oklch(94% 0.03 10);      /* tags and highlights */
+      --sage:       oklch(82% 0.06 155);     /* secondary accent */
+      --sage-deep:  oklch(50% 0.07 155);
+      --border:     oklch(90% 0.02 60);      /* delicate lines */
+      --shadow:     0 18px 40px -18px oklch(40% 0.08 340 / 0.25);
+      --radius:     22px;
+      --radius-sm:  12px;
+    }
+
+/* Dark theme: deep plum with soft glowing accents */
+    [data-theme="dark"] {
+      --bg:         oklch(18% 0.03 320);
+      --surface:    oklch(23% 0.035 320);
+      --text:       oklch(94% 0.015 340);
+      --muted:      oklch(72% 0.03 340);
+      --rose:       oklch(78% 0.11 10);
+      --rose-deep:  oklch(70% 0.13 10);
+      --rose-soft:  oklch(30% 0.05 10);
+      --sage:       oklch(55% 0.06 155);
+      --sage-deep:  oklch(80% 0.07 155);
+      --border:     oklch(33% 0.03 320);
+      --shadow:     0 18px 40px -18px oklch(5% 0.02 320 / 0.7);
+    }
+
+/* BASE STYLES */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+        
+/* Animate the color variables when the theme changes */
+      transition: --bg .6s ease, --surface .6s ease, --text .6s ease,
+                  --muted .6s ease, --rose .6s ease, --sage .6s ease,
+                  --border .6s ease, --rose-soft .6s ease;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: var(--bg);
+        
+ /* Subtle decorative glows in the background */
+      background-image:
+        radial-gradient(60rem 40rem at 90% -10%, color-mix(in oklab, var(--rose) 14%, transparent), transparent 70%),
+        radial-gradient(50rem 36rem at -10% 40%, color-mix(in oklab, var(--sage) 16%, transparent), transparent 70%);
+      background-attachment: fixed;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 600;
+      line-height: 1.15;
+      margin: 0 0 0.5rem;
+      text-wrap: balance;
+    }
+
+    p { text-wrap: pretty; }
+
+    a { color: inherit; text-decoration: none; transition: color .3s ease; }
+    a:hover { color: var(--rose-deep); }
+
+    img { max-width: 100%; display: block; }
+
+    .container { width: min(1140px, 90%); margin: 0 auto; }
+
+    section { padding: 5.5rem 0; }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(2.1rem, 4vw, 2.8rem);
+      margin-bottom: 0.4rem;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      margin: .6rem auto 3rem;
+    }
+    .divider::before,
+    .divider::after {
+      content: "";
+      width: 70px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--rose));
+    }
+    .divider::after { background: linear-gradient(270deg, transparent, var(--rose)); }
+    .divider span {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--rose);
+      box-shadow: 0 0 0 4px color-mix(in oklab, var(--rose) 20%, transparent);
+    }
+
+    .eyebrow {
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--rose-deep);
+      margin: 0 0 .8rem;
+    }
+
+/* REUSABLE FRAME (background panel with a decorative border)
+       Use class="frame" on any element to frame it. */
+    .frame {
+      position: relative;
+      background:
+        linear-gradient(150deg,
+          color-mix(in oklab, var(--surface) 88%, var(--rose) 12%),
+          var(--surface) 55%,
+          color-mix(in oklab, var(--surface) 90%, var(--sage) 10%));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: clamp(1.6rem, 3.5vw, 2.8rem);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+ /* Inner decorative keyline, inset from the frame edge */
+    .frame::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 1px solid color-mix(in oklab, var(--rose) 35%, transparent);
+      border-radius: calc(var(--radius) - 8px);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+/* NAVIGATION */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background-color: color-mix(in oklab, var(--bg) 82%, transparent);
+      backdrop-filter: blur(12px) saturate(1.2);
+      -webkit-backdrop-filter: blur(12px) saturate(1.2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-style: italic;
+      font-weight: 600;
+    }
+    .logo span { color: var(--rose); }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: .95rem;
+      letter-spacing: .04em;
+    }
+    .nav-links a { position: relative; padding-bottom: 3px; }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 0; height: 2px;
+      border-radius: 2px;
+      background: var(--rose);
+      transition: width .35s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* THEME TOGGLE */
+    .theme-toggle {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      z-index: 100;
+      width: 50px;
+      height: 50px;
+      padding: 0;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--rose-deep);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: transform .35s ease, background-color .5s ease, border-color .5s ease;
+    }
+    .theme-toggle:hover { transform: scale(1.08) rotate(12deg); }
+    .theme-toggle:focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; }
+
+    .theme-toggle svg {
+      grid-area: 1 / 1;
+      width: 20px; height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      transition: opacity .4s ease, transform .5s ease;
+    }
+    .theme-toggle .icon-moon { opacity: 1; transform: rotate(0); }
+    .theme-toggle .icon-sun  { opacity: 0; transform: rotate(-90deg); }
+    [data-theme="dark"] .theme-toggle .icon-moon { opacity: 0; transform: rotate(90deg); }
+    [data-theme="dark"] .theme-toggle .icon-sun  { opacity: 1; transform: rotate(0); }
+
+    /* ABOUT ME */
+    .about {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    /* Portrait: an arched frame with a soft gradient border */
+    .portrait {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: 200px 200px var(--radius) var(--radius);
+      padding: 10px;
+      background: linear-gradient(160deg, var(--rose), var(--sage));
+      box-shadow: var(--shadow);
+    }
+    .portrait img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 190px 190px calc(var(--radius) - 4px) calc(var(--radius) - 4px);
+    }
+
+    .hero-title {
+      font-size: clamp(2.6rem, 5vw, 3.9rem);
+      font-weight: 400;
+      margin-bottom: 1.2rem;
+    }
+    .hero-title em { color: var(--rose-deep); }
+
+    .about-text { color: var(--muted); margin: 0 0 1rem; }
+
+    /* Personal details table inside a framed container */
+    .details { margin-top: 1.6rem; }
+    .details-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .95rem;
+    }
+    .details-table caption {
+      text-align: left;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: .6rem;
+      caption-side: top;
+    }
+    .details-table th,
+    .details-table td {
+      padding: .75rem .4rem;
+      text-align: left;
+      border-bottom: 1px dashed var(--border);
+      vertical-align: top;
+    }
+    .details-table tr:last-child th,
+    .details-table tr:last-child td { border-bottom: none; }
+    .details-table th {
+      width: 40%;
+      font-weight: 500;
+      color: var(--rose-deep);
+      letter-spacing: .02em;
+    }
+    .details-table td { color: var(--text); }
+
+    /* Small rounded tags for skills inside the table */
+    .chip {
+      display: inline-block;
+      margin: .15rem .25rem .15rem 0;
+      padding: .2rem .7rem;
+      font-size: .78rem;
+      border-radius: 999px;
+      background: var(--rose-soft);
+      color: var(--text);
+    }
+    .chip.sage { background: color-mix(in oklab, var(--sage) 35%, var(--surface)); }
+
+    /* BUTTONS */
+    .btn-row { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.6rem; }
+
+    .btn {
+      display: inline-block;
+      padding: .8rem 1.8rem;
+      border-radius: 999px;
+      border: 1px solid var(--rose);
+      background: var(--rose);
+      color: #fff;
+      font-size: .95rem;
+      letter-spacing: .05em;
+      transition: background-color .3s ease, color .3s ease, transform .3s ease, box-shadow .3s ease;
+    }
+    .btn:hover {
+      background: transparent;
+      color: var(--rose-deep);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px -12px var(--rose);
+    }
+    .btn-outline { background: transparent; color: var(--rose-deep); }
+    .btn-outline:hover { background: var(--rose); color: #fff; }
+
+    /* PROJECT GRID */
+    .projects {
+      background: color-mix(in oklab, var(--surface) 60%, transparent);
+      border-block: 1px solid var(--border);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform .4s ease, border-color .4s ease;
+    }
+    .card:hover { transform: translateY(-6px); border-color: var(--rose); }
+
+    .card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 1.4rem 1.5rem 1.6rem;
+    }
+    .card-body h3 { font-size: 1.55rem; }
+    .card-body p { color: var(--muted); font-size: .95rem; margin: .4rem 0 1rem; }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      list-style: none;
+      padding: 0;
+      margin: auto 0 0;
+    }
+    .tags li {
+      font-size: .75rem;
+      padding: .25rem .7rem;
+      border-radius: 999px;
+      background: var(--rose-soft);
+      color: var(--text);
+    }
+
+    /* CONTACT */
+    .contact-frame { text-align: center; max-width: 720px; margin: 0 auto; }
+    .contact-frame p { color: var(--muted); max-width: 520px; margin: 0 auto 2rem; }
+
+    /*  FOOTER + SOCIAL LINKS */
+    footer {
+      text-align: center;
+      padding: 4rem 0 6.5rem; /* room below so the toggle never covers text */
+      border-top: 1px solid var(--border);
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem;
+    }
+    .socials a {
+      display: grid;
+      place-items: center;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: transform .3s ease, border-color .3s ease, color .3s ease, box-shadow .3s ease;
+    }
+    .socials a:hover {
+      transform: translateY(-3px);
+      border-color: var(--rose);
+      color: var(--rose-deep);
+      box-shadow: 0 8px 18px -10px var(--rose);
+    }
+    .socials svg { width: 18px; height: 18px; fill: currentColor; }
+
+    .copyright { font-size: .85rem; color: var(--muted); margin: 0; }
+
+    /* RESPONSIVE LAYOUT */
+    @media (max-width: 860px) {
+      section { padding: 3.5rem 0; }
+      .about { grid-template-columns: 1fr; gap: 2.5rem; }
+      .portrait { max-width: 320px; margin: 0 auto; }
+      .about-copy { text-align: center; }
+      .btn-row { justify-content: center; }
+      .details-table th { width: 38%; }
+    }
+
+    @media (max-width: 520px) {
+      .nav-links { gap: 1rem; font-size: .85rem; }
+      .details-table th, .details-table td { display: block; width: 100%; }
+      .details-table th { padding-bottom: 0; border-bottom: none; }
+      .details-table td { padding-top: .2rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
