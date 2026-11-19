@@ -3,12 +3,12 @@ body {
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #fcf4f7;
-    color: #5c434b;
+    color: #0e8f64;
     line-height: 1.5;
 }
 
 header {
-    background-color: #ebdbe0;
+    background-color: #223391;
     color: #7a5c65;
     text-align: center;
     padding: 2rem 0;
@@ -34,12 +34,12 @@ main {
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    border: 2px solid #1e88e5;
+    border: 2px solid #1c746c;
     background-color: #f2f2f2;
 }
 
 .grid-item {
-    border: 1px solid #1e88e5;
+    border: 1px solid #a53518;
     padding: 16px;
     text-align: center;
     background-color: #f9f9f9;
@@ -57,19 +57,6 @@ main {
     color: #333333;
 }
 
-.photo-cell {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.profile-pic {
-    width: 180px;
-    height: 180px;
-    border-radius: 10px;
-    object-fit: cover;
-    border: 3px solid #ebdbe0;
-}
 
 @media (max-width: 700px) {
     .grid-container {
