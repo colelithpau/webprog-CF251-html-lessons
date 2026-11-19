@@ -1,51 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lith Personal Website</title>
-    <link rel="stylesheet" href="css/mystyle.css?v=7">
+    <link rel="stylesheet" href="css/mystyle.css">
 </head>
 <body>
+
     <header>
-        <h1>Personal Profile</h1>
+        <h1>Nicole Paulo/h1>
+
+        <nav>
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#interests">Hobbies</a>
+            <a href="#goals">Goals</a>
+        </nav>
     </header>
 
     <main>
-        <div class="grid-container">
-            <div class="grid-item">
-                <h3>1 About Me</h3>
-                <p><strong>Name:</strong> Juliane Lith Nicole Paulo</p>
-            </div>
 
-            <div class="grid-item">
-                <h3>2 Education</h3>
-                <p>Sophomore Year in Asia Pacific College</p>
-            </div>
+        <!-- GRID CONTAINER: every section below is a cell of the grid -->
+        <div class="container">
 
-            <div class="grid-item">
-                <h3>3 Course</h3>
-                <p>BS Computer Science</p>
-            </div>
+            <!-- ABOUT ME -->
+            <section class="profile" id="about">
 
-            <div class="grid-item">
-                <h3>4 IT Experience/Tools</h3>
-                <p>Virtual Box, Linux, HTML, CSS, Java, Basic Git & Python</p>
-            </div>
+                <img src="https://i.pinimg.com/736x/9a/0f/b7/9a0fb77763ed494a5a7af3d2c21ae3a5.jpg"
+                     alt="Andrew's profile picture">
 
-            <div class="grid-item">
-                <h3>5 Hobbies</h3>
-                <p>Playing Musical Instruments, Quality Time with my cat, Traveling, Reading & Watching Movies</p>
-            </div>
+                <div class="profile-info">
+                    <p class="subtitle">PERSONAL PROFILE</p>
 
-            <div class="grid-item">
-                <h3>6 Dream</h3>
-                <p>Graduate in College and Live life to the Fullest</p>
-            </div>
+                    <h2>Hello, I'm LITH!</h2>
 
-            <div class="grid-item">7</div>
-            <div class="grid-item">8</div>
+                    <p>
+                        I am a BS Computer Science student at APC.
+                    </p>
+                </div>
 
-            </div>
+            </section>
+
+            <!-- EDUCATION -->
+            <section id="education" class="content-card">
+
+                <p class="number">01 / EDUCATION</p>
+
+                <h2>Education & Achievements</h2>
+
+                <p>
+                    In my sophomore year at Asia Pacific College, 
+                </p>
+
+            </section>
+
+            <!-- EXPERIENCE -->
+            <section id="experience" class="content-card">
+
+                <p class="number">02 / EXPERIENCE</p>
+
+                <h2>IT Experience</h2>
+
+                <p>
+                    Currently Learning Kali Linux, Web development, Database design 
+                </p>
+
+            </section>
+
+            <!-- HOBBIES -->
+            <section id="interests" class="content-card">
+
+                <p class="number">03 / INTERESTS</p>
+
+                <h2>Hobbies & Interests</h2>
+
+                <p>
+                    Playing Musical Instruments, Quality Time with my cat,
+                    Watching movies/series & Traveling
+                </p>
+
+            </section>
+
+            <!-- GOALS -->
+            <section id="goals" class="content-card">
+
+                <p class="number">04 / FUTURE</p>
+
+                <h2>Goals & Dreams</h2>
+
+                <p>
+                 Aspiring SOC Analyst
+                </p>
+
+            </section>
+
+            <!-- GALLERY -->
+            <section id="gallery">
+
+                <p class="number">05 / GALLERY</p>
+
+                <h2>Picture Gallery</h2>
+
+
+            </section>
+
         </div>
+
     </main>
+
+    <footer>
+        <p>© 2026 Lith</p>
+        <a href="#about">Back to top ↑</a>
+    </footer>
+
 </body>
 </html>
