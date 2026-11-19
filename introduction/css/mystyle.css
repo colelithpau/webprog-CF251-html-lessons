@@ -1,4 +1,3 @@
-/* ===== Tokens ===== */
 :root {
   --bg: #3a0202;
   --surface: #420202;
@@ -13,9 +12,12 @@
   --header-h: 110px;
 }
 
-/* ===== Base ===== */
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+/* ===== Main ===== */
+* { box-sizing: 
+  border-box; }
+html { 
+  scroll-behavior: smooth; 
+}
 
 body {
   margin: 0;
@@ -40,8 +42,7 @@ a:focus-visible {
     outline: 2px solid var(--accent); 
     outline-offset: 3px; 
     border-radius: 4px; }
-img { max-width: 100%; 
-    display: block; }
+
 
 /* ===== Header ===== */
 header {
