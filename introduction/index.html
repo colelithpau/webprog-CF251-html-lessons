@@ -37,21 +37,120 @@
 
 <div class="footer"><p>Resize the browser window to see the responsive effect.</p></div>
   
-</div>
-      <header>
-        <h1>Personal Profile Web page</h1>
-      </header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lith Personal Website</title>
+    <link rel="stylesheet" href="css/css.grid.css">
+    <link rel="stylesheet" href="css/flexbox.css">
+</head>
+<body>
+
+    <header>
+        <h1>Nicole Paulo</h1>
+
+        <nav>
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#interests">Hobbies</a>
+            <a href="#goals">Goals</a>
+        </nav>
+    </header>
 
     <main>
-    <h2>About Me (Hello, I'm Nicole Lith Paulo!)</h2>
-    <br>Education / Achievements: SHS Graduate, Ongoing a college degree</p>
-         <br>Course: Bachelor of Science in Computer Science with specialization in Cybersecurity and forensics.</h3>
-            <br>IT Experience: HTML, CSS, JS, Linux, Java and Python
-                 <br>Hobbies & Interests: Playing Musical Instruments, Reading and Traveling
-                    <br>Goals In Life / Dream: Finish my degree 
-                <h3>Picture Gallery </h3>
-            <div id="header" align="center">
-        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExazlseGVubXR5cGxtd29lbXNlMHd4MnR1NnB4aWFvMXVteGFmZ2Y0aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbnUQpnihPSIgIXuZv/giphy.gif" width="200"/>
+
+        <!-- GRID CONTAINER: every section below is a cell of the grid -->
+        <div class="container">
+
+            <!-- ABOUT ME -->
+            <section class="profile" id="about">
+
+                <div class="profile-info">
+                    <p class="subtitle">PERSONAL PROFILE</p>
+
+                    <h2>Hello, I'm LITH!</h2>
+
+                    <p>
+                        I am a BS Computer Science student with specialization in Cybersecurity and Forensics at APC.
+                    </p>
+                </div>
+
+            </section>
+
+            <!-- EDUCATION -->
+            <section id="education" class="content-card">
+
+                <p class="number">01 / EDUCATION</p>
+
+                <h2>Education & Achievements</h2>
+
+                <p>
+                    In my sophomore year at Asia Pacific College, 
+                </p>
+
+            </section>
+
+            <!-- EXPERIENCE -->
+            <section id="experience" class="content-card">
+
+                <p class="number">02 / EXPERIENCE</p>
+
+                <h2>IT Experience</h2>
+
+                <p>
+                    Currently Learning Kali Linux, Web development, Database design 
+                </p>
+
+            </section>
+
+            <!-- HOBBIES -->
+            <section id="interests" class="content-card">
+
+                <p class="number">03 / INTERESTS</p>
+
+                <h2>Hobbies & Interests</h2>
+
+                <p>
+                    Playing Musical Instruments, Quality Time with my cat,
+                    Watching movies/series & Traveling
+                </p>
+
+            </section>
+
+            <!-- GOALS -->
+            <section id="goals" class="content-card">
+
+                <p class="number">04 / </p>
+
+                <h2>Goals & Dreams</h2>
+
+                <p>
+                 Aspiring SOC Analyst
+                </p>
+
+            </section>
+
+            <!-- GALLERY -->
+            <section id="gallery">
+
+                <p class="number">05 / GALLERY</p>
+
+                <h2>Picture Gallery</h2>
+
+
+            </section>
+
+        </div>
+
     </main>
-  </body>
+
+    <footer>
+        <p>© 2026 Juliane Lith Nicole Paulo</p>
+        <a href="#about">Back to top ↑</a>
+    </footer>
+
+</body>
 </html>
+
